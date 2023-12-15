@@ -5,18 +5,21 @@ import cv2
 
 
 time_zone = pytz.timezone("Europe/Moscow")
-mp4_name = datetime.now(time_zone)
+# mp4_name = f"{datetime.now(time_zone)}_opencv.mp4"
 
-def make_words_move(some_words: str) -> None:
+def make_words_move(some_words: str) :
     """takes a string and creates a .mp4 ticker using cv2 
         :some_words: text for convert
         :type some_words: str
     """
     width, height = 100, 100 #Оutput file resolution size
     # Set parameters for video
+    mp4_name = f"{datetime.now(time_zone)}_opencv.mp4"
     out = cv2.VideoWriter(
-        f"video/{mp4_name}_opencv.mp4", cv2.VideoWriter_fourcc(*'mp4v'), 24,
+        f"video/{mp4_name}", 
+        cv2.VideoWriter_fourcc(*'mp4v'), 24, # type: ignore
         (width, height))
+    print(mp4_name)
 
     # Create black background
     frame = np.zeros((height, width, 3), dtype=np.uint8)    
@@ -40,6 +43,8 @@ def make_words_move(some_words: str) -> None:
         # write the frame
         out.write(frame)
     out.release()
+    
+    return mp4_name
 
 if __name__ == '__main__':
     test_text = "Пример текста! Text example!"
