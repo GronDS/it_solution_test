@@ -1,0 +1,18 @@
+{% extends "main/base.html" %}
+{%block title%}
+{{ title }}
+{%endblock%}
+
+{%block content%}
+    <h2>Last mp4</h2>
+    {% if videos %}
+        {% for el in videos %}
+            <div class="alert alert-succeses mt-2">
+                <h4>{{ el.word }}</h4>
+                <p>{{ el.date }} </p>
+            </div>
+        {%endfor%}
+    {% else %}
+            <p>No requests</p>
+    {% endif %}
+{%endblock%}

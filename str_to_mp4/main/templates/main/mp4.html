@@ -1,0 +1,15 @@
+{% extends "main/base.html" %}
+{%block title%}
+LinkToMP4
+{%endblock%}
+
+{%block content%}
+    <p>Enter the text in the form below</p>
+
+    <form method= "post">
+        {% csrf_token %}<br>
+        {{form.word}}<br>
+        <button type="submit" class="btn btn-success">Submit</button>
+        <span>{{ error }}</span>
+        
+{%endblock%}
