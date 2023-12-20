@@ -15,9 +15,11 @@ def make_words_move(some_words: str) :
     width, height = 100, 100 #Оutput file resolution size
     # Set parameters for video
     mp4_name = f"{datetime.now(time_zone)}_opencv.mp4"
+    framerate = int(len(some_words) // 1.1)
+    print(framerate)
     out = cv2.VideoWriter(
         f"video/{mp4_name}", 
-        cv2.VideoWriter_fourcc(*'mp4v'), 24, # type: ignore
+        cv2.VideoWriter_fourcc(*'mp4v'), framerate, # type: ignore
         (width, height))
     print(mp4_name)
 
@@ -34,7 +36,7 @@ def make_words_move(some_words: str) :
     font_color = (255, 255, 255)  # White text color
 
     # Creating every frame
-    for t in range(72):  # 3 sec x 24fps
+    for t in range(framerate * 3):  # 3 sec x 24fps
         frame.fill(0)
         x -= 10  # ticker speed
         cv2.putText(
@@ -47,5 +49,5 @@ def make_words_move(some_words: str) :
     return mp4_name
 
 if __name__ == '__main__':
-    test_text = "Пример текста! Text example!"
+    test_text = "Пример текста!Пример текста!Пример текста!Пример текста!Пример текста!Пример текста!"
     make_words_move(test_text)
